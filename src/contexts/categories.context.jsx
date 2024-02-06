@@ -1,11 +1,11 @@
 import { createContext, useState, useEffect } from 'react';
 import { getCategoriesAndDocuments } from '../utils/firebase/firebase.utils';
 
-export const ProductsContext = createContext({
+export const CategoriesContext = createContext({
   products: [],
 });
 
-export const ProductsProvider = ({ children }) => {
+export const CategoriesProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
 
 
@@ -39,9 +39,9 @@ export const ProductsProvider = ({ children }) => {
   
   const value = { products };
   return (
-    <ProductsContext.Provider value={value}>
+    <CategoriesContext.Provider value={value}>
       {children}
-    </ProductsContext.Provider>
+    </CategoriesContext.Provider>
   );
 };
 
@@ -55,11 +55,11 @@ export const ProductsProvider = ({ children }) => {
 
 // // import SHOP_DATA from '../shop-data.js';
 
-// export const ProductsContext = createContext({
+// export const CategoriesContext = createContext({
 //   products: [],
 // });
 
-// export const ProductsProvider = ({ children }) => {
+// export const CategoriesProvider = ({ children }) => {
 //   const [products, setProducts] = useState([]);
 
 //   useEffect(async () => {
@@ -74,8 +74,10 @@ export const ProductsProvider = ({ children }) => {
 
 //   const value = { products };
 //   return (
-//     <ProductsContext.Provider value={value}>
+//     <CategoriesContext.Provider value={value}>
 //       {children}
-//     </ProductsContext.Provider>
+//     </CategoriesContext.Provider>
 //   );
 // };
+
+
