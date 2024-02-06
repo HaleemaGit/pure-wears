@@ -13,15 +13,26 @@ export const CategoriesProvider = ({ children }) => {
     const fetchData = async () => {
       try {
         const categories = await getCategoriesAndDocuments('collections');
-    
+  
         // Log the received data for debugging
         console.log('Received data:', categories);
-    
-        const allProducts = Object.values(categories).reduce((accumulator, category) => {
-          if (Array.isArray(category)) {
-            accumulator.push(...category);
+  
+        const groupedProducts = [];
+        
+        // Group products by category
+        for (const category in categories) {
+          if (Array.isArray(categories[category])) {
+            groupedProducts.push({
+              category: category,
+              items: categories[category]
+            });
           }
-          return accumulator;
+        }
+  
+        // Flatten the grouped products array
+        const allProducts = groupedProducts.reduce((accumulator, category) => {
+          accumulator.push({ heading: category.category, items: category.items });
+          return accumulator.concat(category.items);
         }, []);
   
         setProducts(allProducts);
@@ -34,6 +45,32 @@ export const CategoriesProvider = ({ children }) => {
   
     fetchData();
   }, []);
+  
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const categories = await getCategoriesAndDocuments('collections');
+    
+  //       // Log the received data for debugging
+  //       console.log('Received data:', categories);
+    
+  //       const allProducts = Object.values(categories).reduce((accumulator, category) => {
+  //         if (Array.isArray(category)) {
+  //           accumulator.push(...category);
+  //         }
+  //         return accumulator;
+  //       }, []);
+  
+  //       setProducts(allProducts);
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //       // Handle the error or set a default value for products
+  //       // For example: setProducts([]);
+  //     }
+  //   };
+  
+  //   fetchData();
+  // }, []);
    
   
   
