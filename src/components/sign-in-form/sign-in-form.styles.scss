@@ -11,4 +11,10 @@
     display: flex;
     justify-content: space-between;
   }
+
+button span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 }

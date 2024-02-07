@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext  } from 'react';
 import { getRedirectResult } from 'firebase/auth';
 import FormInput from '../form-input/form-input.component';
-import Button from '../button/button.component';
+import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 import { UserContext } from '../../contexts/user.context';
 import {
  auth,
@@ -108,9 +108,13 @@ const SignInForm = () => {
           { /*<Button type='button' buttonType='google' onClick={signInWithGoogle}>
            Sign in with Google Popup
          </Button>*/ }
-         <Button type='button' buttonType='google' onClick={signInWithGoogleRedirect}>
-          Google Sign in
-         </Button>
+         <Button
+         buttonType={BUTTON_TYPE_CLASSES.google}
+         type='button'
+         onClick={signInWithGoogleRedirect}
+       >
+         Google signin
+       </Button>
        </div>
      </form>
    </div>

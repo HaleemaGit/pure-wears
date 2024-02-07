@@ -38,40 +38,15 @@ export const CategoriesProvider = ({ children }) => {
         setProducts(allProducts);
       } catch (error) {
         console.error('Error fetching data:', error);
-        // Handle the error or set a default value for products
-        // For example: setProducts([]);
+        // // Handle the error or set a default value for products
+        // // For example: setProducts([]);
       }
     };
   
     fetchData();
   }, []);
   
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const categories = await getCategoriesAndDocuments('collections');
-    
-  //       // Log the received data for debugging
-  //       console.log('Received data:', categories);
-    
-  //       const allProducts = Object.values(categories).reduce((accumulator, category) => {
-  //         if (Array.isArray(category)) {
-  //           accumulator.push(...category);
-  //         }
-  //         return accumulator;
-  //       }, []);
-  
-  //       setProducts(allProducts);
-  //     } catch (error) {
-  //       console.error('Error fetching data:', error);
-  //       // Handle the error or set a default value for products
-  //       // For example: setProducts([]);
-  //     }
-  //   };
-  
-  //   fetchData();
-  // }, []);
-   
+ 
   
   
   const value = { products };
