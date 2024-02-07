@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import ProductCard from '../product-card/product-card.component';
 import './category-preview.styles.scss';
 
@@ -8,12 +7,10 @@ const CategoryPreview = ({ productGroup }) => {
     return null; // Return early or handle the case where productGroup is undefined
   }
 
-  const categoryLink = `/shop/${encodeURIComponent(productGroup.heading)}`; // Ensure URL encoding
-
   return (
     <div className='category-preview-container'>
       <h2>
-        <Link className='title' to={categoryLink}>{productGroup.heading.toUpperCase()}</Link>
+        <span className='title'>{productGroup.heading.toUpperCase()}</span>
       </h2>
       <div className='preview'>
         {productGroup.items &&
