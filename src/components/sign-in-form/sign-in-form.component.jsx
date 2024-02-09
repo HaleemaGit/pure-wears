@@ -7,7 +7,7 @@ import {
  auth,
  signInWithGoogleRedirect,
  signInAuthUserWithEmailAndPassword,
-} from '../../utils/firebase/firebase.utils';
+} from '../../utils/firebase/firebase/firebase.utils';
 import './sign-in-form.styles.scss';
 
 
