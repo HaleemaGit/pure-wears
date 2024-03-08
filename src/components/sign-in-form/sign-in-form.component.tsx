@@ -10,6 +10,7 @@ import {
   emailSignInStart,
 } from '../../store/user/user.reducer';
 
+
 const defaultFormFields = {
   email: '',
   password: '',
@@ -25,15 +26,14 @@ const SignInForm = () => {
   };
 
   const signInWithGoogle = async () => {
-    dispatch(googleSignInStart());
-  };
+    dispatch(googleSignInStart() as any);   };
   
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   
     try {
-      dispatch(emailSignInStart({ email, password }));
+      dispatch(emailSignInStart({ email, password }) as any);
       resetFormFields();
     } catch (error) {
       console.log('user sign in failed', error);
