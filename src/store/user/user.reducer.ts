@@ -175,14 +175,16 @@
 
 import { createSlice, createAsyncThunk, PayloadAction, Slice } from '@reduxjs/toolkit';
 import { UserData } from '../../utils/firebase/firebase/firebase.utils';
-
-import { getCurrentUser, createUserDocumentFromAuth,
+import {
+  getCurrentUser,
+  createUserDocumentFromAuth,
   signInWithGoogleRedirect,
   signInAuthUserWithEmailAndPassword,
   createAuthUserWithEmailAndPassword,
   signOutUser,
-  AdditionalInformation, } from '../../utils/firebase/firebase/firebase.utils';
-// Export the UserState type
+  AdditionalInformation,
+} from '../../utils/firebase/firebase/firebase.utils';
+
 export interface UserState {
   currentUser: UserData | null;
   isLoading: boolean;
@@ -195,7 +197,6 @@ const initialState: UserState = {
   error: null,
 };
 
-// Create a Redux Toolkit slice
 const userSlice: Slice<UserState, {
   signInSuccess: (state: UserState, action: PayloadAction<UserData & { id: string }>) => void;
   signOutSuccess: (state: UserState) => void;
@@ -246,15 +247,19 @@ export const {
 
 export const userReducer = userSlice.reducer;
 
-// Thunks for async operations
 export const googleSignInStart = createAsyncThunk(
   'user/googleSignInStart',
   async () => {
-    const result = await signInWithGoogleRedirect();
-    if (result && result.user) {
-      return result.user;
-    } else {
-      throw new Error('Google sign-in failed');
+    try {
+      const result: any = await signInWithGoogleRedirect();
+      if (result && result.user) {
+        return result.user;
+      } else {
+        throw new Error('Google sign-in failed');
+      }
+    } catch (error) {
+      // Handle error
+      throw error;
     }
   }
 );
@@ -262,11 +267,16 @@ export const googleSignInStart = createAsyncThunk(
 export const emailSignInStart = createAsyncThunk(
   'user/emailSignInStart',
   async (payload: { email: string; password: string }) => {
-    const userCredential = await signInAuthUserWithEmailAndPassword(payload.email, payload.password);
-    if (userCredential && userCredential.user) {
-      return userCredential.user;
-    } else {
-      throw new Error('Email sign-in failed');
+    try {
+      const userCredential = await signInAuthUserWithEmailAndPassword(payload.email, payload.password);
+      if (userCredential && userCredential.user) {
+        return userCredential.user;
+      } else {
+        throw new Error('Email sign-in failed');
+      }
+    } catch (error) {
+      // Handle error
+      throw error;
     }
   }
 );
@@ -274,11 +284,16 @@ export const emailSignInStart = createAsyncThunk(
 export const signUpStart = createAsyncThunk(
   'user/signUpStart',
   async (payload: { email: string; password: string; displayName: string }) => {
-    const userCredential = await createAuthUserWithEmailAndPassword(payload.email, payload.password);
-    if (userCredential && userCredential.user) {
-      return { user: userCredential.user, additionalDetails: { displayName: payload.displayName } };
-    } else {
-      throw new Error('Sign-up failed');
+    try {
+      const userCredential = await createAuthUserWithEmailAndPassword(payload.email, payload.password);
+      if (userCredential && userCredential.user) {
+        return { user: userCredential.user, additionalDetails: { displayName: payload.displayName } };
+      } else {
+        throw new Error('Sign-up failed');
+      }
+    } catch (error) {
+      // Handle error
+      throw error;
     }
   }
 );
@@ -286,8 +301,11 @@ export const signUpStart = createAsyncThunk(
 export const signOutStart = createAsyncThunk(
   'user/signOutStart',
   async () => {
-    await signOutUser();
+    try {
+      await signOutUser();
+    } catch (error) {
+      // Handle error
+      throw error;
+    }
   }
 );
-
-// Add other thunks as needed

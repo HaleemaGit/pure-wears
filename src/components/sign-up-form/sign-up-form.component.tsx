@@ -33,8 +33,7 @@ const SignUpForm = () => {
     }
 
     try {
-      dispatch(signUpStart(email, password, displayName));
-      resetFormFields();
+dispatch(signUpStart({ email, password, displayName }) as any);      resetFormFields();
     } catch (error) {
       if ((error as AuthError).code === AuthErrorCodes.EMAIL_EXISTS) {
         alert('Cannot create user, email already in use');
